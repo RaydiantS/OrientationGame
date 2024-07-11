@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask solidLayer;
 
-    private int debugTurningTimes = 0; //debugVar 2
-
     //Detect Collisions and store the boolean value inside this variable
     public bool isWalkable(Vector3 targetPosition)
     {
@@ -54,11 +52,9 @@ public class PlayerController : MonoBehaviour
             //stays true or false for a long time while isMoving oscillates btw true and false frequently
             if (input.x != 0 || input.y != 0)
             {
-                //Debug.Log("This is input.x: " + input.x);
-                //Debug.Log("And this is input.y: " + input.y);
+             
                 isWalking = true;
                 ////animator.SetBool("isWalking", isWalking);
-                //Debug.Log("isWalking is TRUE");
             }
             else
             {
@@ -95,20 +91,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Move(Vector3 targetPosition)
     {
-        //Debug.Log("@@@ Move from --- " + transform.position + " --- to --- " + targetPosition);
 
         isMoving = true;
-        //Debug.Log("*** isMoving SET TRUE");
-
-        //Debug.Log("*** START move");
-
-        //int dbgLpCnt = 0; //debugVar 1
+       
 
         while ((transform.position - targetPosition).sqrMagnitude > Mathf.Epsilon)
         {
-            //dbgLpCnt++; //debugVar 1
-
-            // Debug.Log("*** IN while loop ***");
 
             Vector3 newPos = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             //uses a middle variable, and does not use targetPosition
@@ -122,19 +110,9 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        //Debug.Log("*** while loop " + dbgLpCnt + "x"); //debugVar 1
-
-        //yield return new WaitForSeconds(1f);
 
         isMoving = false;
-        //Debug.Log("*** isMoving SET FALSE");
-
-        //Debug.Log("*** STOP move");
-
-        //yield return null;
-
 
     }
 
 }
-//Bug Description: When the player collides into something, it will stop, but will keep walking into the collider without further control. 
